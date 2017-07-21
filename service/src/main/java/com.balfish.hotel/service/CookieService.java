@@ -19,7 +19,7 @@ public class CookieService {
     private static final Logger LOGGER = LoggerFactory.getLogger(Object.class);
 
     @Resource
-    private AccountService accountService;
+    private AccountService accountService ;
 
     @Resource
     private LoginService loginService;
