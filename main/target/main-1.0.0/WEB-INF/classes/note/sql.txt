@@ -1,0 +1,15 @@
+CREATE TABLE `hotel` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `hotel_id` int(11) NOT NULL DEFAULT '0' COMMENT '酒店id',
+  `hotel_name` varchar(50) NOT NULL DEFAULT '' COMMENT '酒店名称',
+  `hotel_address` varchar(50) NOT NULL DEFAULT '' COMMENT '酒店地址',
+  `hotel_phone` varchar(50) NOT NULL DEFAULT '' COMMENT '酒店电话',
+  `hotel_grade_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '酒店星级',
+  `create_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_hotel_id` (`hotel_id`),
+  UNIQUE KEY `uniq_name_address_phone` (`hotel_name`, `hotel_address`, `hotel_phone`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='酒店表';
+
+insert into hotel(hotel_name, hotel_address, hotel_phone, hotel_grade_type) values('测试大酒店1','浙江省杭州市西湖区','111-1111','1');

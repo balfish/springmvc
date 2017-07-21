@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.balfish.hotel.dao.HotelDao">
+    <resultMap id="hotelEntity" type="com.balfish.hotel.model.HotelEntity">
+        <id column="id" property="id"/>
+        <result column="hotel_id" property="hotelId"/>
+        <result column="hotel_name" property="hotelName"/>
+        <result column="hotel_address" property="hotelAddress"/>
+        <result column="hotel_phone" property="hotelPhone"/>
+        <result column="hotel_grade_type" property="hotelGradeType"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="allFields">
+        `id`,
+        `hotel_id`,
+        `hotel_name`,
+        `hotel_address`,
+        `hotel_phone`,
+        `hotel_grade_type`,
+        -- `create_time`,
+        `update_time`
+    </sql>
+
+    <sql id="whereCondition">
+        <if test="id != null">
+            id = #{id}
+        </if>
+    </sql>
+
+    <select id="query" resultMap="hotelEntity">
+        SELECT
+        <include refid="allFields"/>
+        FROM
+        `hotel`
+        <where>
+            <include refid="whereCondition"/>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="com.balfish.hotel.model.HotelEntity">
+        INSERT INTO `hotel`
+        (
+        <if test="hotelId != null">
+            `hotel_id`,
+        </if>
+        <if test="hotelName != null">
+            `hotel_name`,
+        </if>
+        <if test="hotelAddress != null">
+            `hotel_address`,
+        </if>
+        <if test="hotelPhone != null">
+            `hotel_phone`,
+        </if>
+        <if test="hotelGradeType != null">
+            `hotel_grade_type`,
+        </if>
+        <if test="createTime != null">
+            `create_time`,
+        </if>
+        <if test="updateTime != null">
+            `update_time`,
+        </if>
+        )
+        VALUES (
+        <if test="hotelId != null">
+            #{hotelId},
+        </if>
+        <if test="hotelName != null">
+            #{hotelName},
+        </if>
+        <if test="hotelAddress != null">
+            #{hotelAddress},
+        </if>
+        <if test="hotelPhone != null">
+            #{hotelPhone},
+        </if>
+        <if test="hotelGradeType != null">
+            #{hotelGradeType},
+        </if>
+        <if test="createTime != null">
+            #{createTime},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime},
+        </if>
+        )
+    </insert>
+
+</mapper>
+

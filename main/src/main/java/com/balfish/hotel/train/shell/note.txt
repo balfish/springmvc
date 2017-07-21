@@ -1,0 +1,55 @@
+readlink  输出符号链接值或权威文件名
+
+usage:
+$ readlink /usr/bin/awk
+/etc/alternatives/awk  ----> 其实这个还是一个符号连接
+$ readlink /etc/alternatives/awk
+/usr/bin/mawk  ----> 这个才是真正的可执行文件
+ -f 选项：
+一直跟随符号链接，直到非符号链接的文件位置，限制是最后必须存在一个非符号链接的文件。
+$ readlink -f /usr/bin/awk
+/usr/bin/mawk
+
+
+
+
+#dirname命令的作用是取定给定路径的目录部分,多在脚本中使用  cd $(dirname $0)  | cd `dirname $0`跳转到脚本所在目录
+BIN=$(cd `dirname $0`; pwd)
+echo $BIN
+
+
+
+ ubunbu 分屏
+1:安装terminator
+
+sudo apt-get install terminator
+二：默认ctrl+alt+T打开Terminator
+gsettings set org.gnome.desktop.default-applications.terminal exec   /usr/bin/terminator
+gsettings set org.gnome.desktop.default-applications.terminal exec-arg "-x"
+
+使用方法：
+上下分屏=>c+s+o,左右分屏=>c+s+e
+关闭一个窗口或分屏=>c+s+w,退出终端=>c+s+q
+控制窗口大小 快捷式：c+s+ ←↑↓→,切换窗口c+tab 窗口最大化=> F11
+
+
+
+
+正则式懒惰模式
+
+后边多一个？表示懒惰模式，必须跟在*或者+后边用
+如：<img src="test.jpg" width="60px" height="80px"/>
+非懒惰模式匹配:
+src=".*"
+匹配结果是：src="test.jpg" width="60px" height="80px"
+意思是从="往后匹配，直到最后一个"匹配结束
+
+懒惰模式匹配：
+src=".*?"
+匹配结果是：src="test.jpg"
+因为匹配到第一个"就结束了一次匹配。不会继续向后匹配。
+
+其中,
+.表示除\n之外的任意字符
+*表示匹配0-无穷
++表示匹配1-无穷

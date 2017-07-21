@@ -1,0 +1,215 @@
+ssh:
+
+(1)struts 是web框架（jsp/action/actionform）
+(2)hibernate是orm框架（对象关系映射），处于持久层(主要解决了关系模型和对象模型的阻抗)
+(3)spring是容器框架，是配置bean并维护bean之间关系的框架.其中bean可以是任何一种对象，如javabean/service/action/数据源/dao
+
+spring特性:ioc（inverse of control）/DI（dependency injection）
+
+web层次图
+
+
+login.jsp ->   Action.java(ActionForm.java)   ->    ok.jsp                    web层，struts
+-------------------------------------------------------------------------
+Users.java(domain/javabean/pojo)     -> UserService.java                       业务层
+-------------------------------------------------------------------------
+                            dao(UserDao/HibernateUtils)                        dao层
+-------------------------------------------------------------------------
+                           hibernate(orm框架)                                 持久层
+-------------------------------------------------------------------------
+                             数据库
+
+
+spring纵跨所有层，管理web层，业务层，dao层，持久层，不能管理数据库，但能间接通过数据源管理。
+该框架可以配置各个层的组件，并且维护各个bean之间的关系
+
+
+struts  web层，接管jsp/action/表单，主要体现mvc的数据输入，数据的处理，数据的分离
+C              action
+V              login.jsp ，ok.jsp
+M             model层 = 业务层 + dao层 + 持久层
+
+真正项目有的没有dao层 + 持久层，有的没有持久层，组合很灵活。不一定model层这三个都有，结合实际情况选择。
+
+传统的方法和spring的方法的区别:使用spring不用new对象，把创建对象的任务交给spring框架。
+
+
+
+
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:annotationDao.xml")
+
+
+    private static ClassPathXmlApplicationContext classPathXmlApplicationContext;
+
+    static {
+        classPathXmlApplicationContext = new ClassPathXmlApplicationContext("xmlDao.xml");
+    }
+
+    @Before
+    public void clearAndInit() {
+
+        userService = (UserService) classPathXmlApplicationContext.getBean("userService");
+        roleService = (RoleService) classPathXmlApplicationContext.getBean("roleService");
+
+        roleService.addRole(new Role(1, "role1"));
+        roleService.addRole(new Role(2, "role2"));
+
+        userService.addUser(new User(1, "user1", "password1"), new Role(1, "role1"));
+        userService.addUser(new User(2, "user2", "password2"), new Role(2, "role2"));
+        userService.addUser(new User(3, "user3", "password3"), new Role(3, "role3"));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+采用<mvc:default-servlet-handler />
+
+
+
+在springMVC-servlet.xml中配置<mvc:default-servlet-handler />后，会在Spring MVC上下文中定义一个org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler，它会像一个检查员，对进入DispatcherServlet的URL进行筛查，如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，才由DispatcherServlet继续处理。
+
+一般Web应用服务器默认的Servlet名称是"default"，因此DefaultServletHttpRequestHandler可以找到它。如果你所有的Web应用服务器的默认Servlet名称不是"default"，则需要通过default-servlet-name属性显示指定：
+
+<mvc:default-servlet-handler default-servlet-name="所使用的Web服务器默认使用的Servlet名称" />
+
+
+
+
+
+
+
+
+
+
+
+synchronized 也有好处的，比如一些性能监控工具，可以监测到 synchronized 的锁。无法监测到 Lock 的锁定，毕竟 Lock 的锁定是通过代码实现的，而 synchronized 是在 JVM 层面上实现的。要监控工具能监测到 Lock 的锁定那还需要有一段时日。
+
+另外，synchronized 在锁定时如果方法块抛出异常，JVM 会自动将锁释放掉，不会因为出了异常没有释放锁造成线程死锁。但是 Lock 的话就享受不到 JVM 带来自动的功能，出现异常时必须在 finally 将锁释放掉，否则将会引起死锁。Lock 锁的代码结构一般是这样的：
+
+lock.lock();
+try {
+    xxxx;
+} finally {
+    lock.unlock();
+}
+
+
+
+
+主要相同点：Lock能完成synchronized所实现的所有功能
+
+不同：
+1.ReentrantLock功能性方面更全面，比如时间锁等候，可中断锁等候，锁投票等，因此更有扩展性。在多个条件变量和高度竞争锁的地方，用ReentrantLock更合适，ReentrantLock还提供了Condition，对线程的等待和唤醒等操作更加灵活，一个ReentrantLock可以有多个Condition实例，所以更有扩展性。
+2.ReentrantLock必须在finally中释放锁，否则后果很严重，编码角度来说使用synchronized更加简单，不容易遗漏或者出错。
+3.ReentrantLock 的性能比synchronized会好点。
+4.ReentrantLock提供了可轮询的锁请求，他可以尝试的去取得锁，如果取得成功则继续处理，取得不成功，可以等下次运行的时候处理，所以不容易产生死锁，而synchronized则一旦进入锁请求要么成功，要么一直阻塞，所以更容易产生死锁。
+
+转载：
+
+1、ReentrantLock 拥有Synchronized相同的并发性和内存语义，此外还多了 锁投票，定时锁等候和中断锁等候
+
+     线程A和B都要获取对象O的锁定，假设A获取了对象O锁，B将等待A释放对O的锁定，
+
+     如果使用 synchronized ，如果A不释放，B将一直等下去，不能被中断
+
+     如果 使用ReentrantLock，如果A不释放，可以使B在等待了足够长的时间以后，中断等待，而干别的事情
+
+    ReentrantLock获取锁定与三种方式：
+    a)  lock(), 如果获取了锁立即返回，如果别的线程持有锁，当前线程则一直处于休眠状态，直到获取锁
+
+    b) tryLock(), 如果获取了锁立即返回true，如果别的线程正持有锁，立即返回false；
+
+    c) tryLock (long timeout, TimeUnit  unit)，   如果获取了锁定立即返回true，如果别的线程正持有锁，会等待参数给定的时间，在等待的过程中，如果获取了锁定，就返回true，如果等待超时，返回false；
+
+    d) lockInterruptibly:如果获取了锁定立即返回，如果没有获取锁定，当前线程处于休眠状态，直到或者锁定，或者当前线程被别的线程中断
+
+2、synchronized是在JVM层面上实现的，不但可以通过一些监控工具监控synchronized的锁定，而且在代码执行时出现异常，JVM会自动释放锁定，但是使用Lock则不行，lock是通过代码实现的，要保证锁定一定会被释放，就必须将 unLock()放到finally{} 中
+
+3、在资源竞争不是很激烈的情况下，Synchronized的性能要优于ReetrantLock，但是在资源竞争很激烈的情况下，Synchronized的性能会下降几十倍，但是ReetrantLock的性能能维持常态
+
+
+
+
+
+
+
+
+    /**
+     *
+     * log framework: Logger Appender Layout Encoder
+     *
+     * Logger是日志写入器，Appender决定了写入终端还是文件，layout能处理日志的布局（如文本格式还是html格式等），Encoder管理着编码的信息。
+     *
+     * log的等级(逐渐降低) fatal -> error -> warn -> info -> debug -> trace
+     *
+     * guava文档 http://tool.oschina.net/apidocs/apidoc?api=guava
+     *
+     * ReentrantLock lock= new ReentrantLock(); lock.lock(); lock.unlock();
+     */
+
+
+第四层，应用层　
+第三层，传输层　
+第二层，网间层　
+第一层，网络接口
+
+
+
+
+
+mybatis 写法 小节:
+------------------------------------------------------
+List<SHotel> findByIdBatch(@Param("list") List<Long> list)
+
+
+<sql id = "selectFields">
+    sh.my_name as myName,
+    sh.my_age as myAge
+</sql>
+
+<sql id="limit">
+    <if test='_offset != null and _limit != null'>
+        limit #{_offset}, #{_limit}
+    </if>
+
+    <if test='_offset == null and _limit != null'>
+        limit #{_limit}
+    </if>
+    <if test='_offset == null and _limit == null'>
+        <include refid="max_limit"/>
+    </if>
+</sql>
+<sql id="max_limit">
+    limit 3000
+</sql>
+
+<select id = "findByIdBatch" resultMap = "SHotel">
+select
+<include refid ="selectFields" >
+from shotel sh
+where
+id in
+<foreach collection = "list" item = "item" index = "index" separator = "," open="(" close=")" >
+    #{item}
+</foreach>
+</select>
+
+
+
+
+    private static final String lineSeparator = System.getProperty("line.separator");
+
+
+    private static final String CITY_SOURCE_PATH = Test.class.getResource("/").getPath() + "demo/qpoi0918.txt";

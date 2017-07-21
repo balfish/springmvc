@@ -1,21 +1,388 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.balfish</groupId>
-  <artifactId>springmvc</artifactId>
-  <packaging>war</packaging>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>springmvc Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <build>
-    <finalName>springmvc</finalName>
-  </build>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.balfish.hotel</groupId>
+    <artifactId>hoteldev</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <modules>
+        <module>main</module>
+        <module>service</module>
+        <module>dao</module>
+        <module>biz</module>
+        <module>common</module>
+        <module>model</module>
+    </modules>
+
+    <properties>
+        <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
+        <guava.version>18.0</guava.version>
+        <jedis.version>2.8.1</jedis.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- self modules -->
+            <dependency>
+                <groupId>com.balfish.hotel</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.balfish.hotel</groupId>
+                <artifactId>biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.balfish.hotel</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.balfish.hotel</groupId>
+                <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.balfish.hotel</groupId>
+                <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- servlet -->
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- logging   Jakarta Commons Logging,　log4j,　Java Util Logging　桥接器-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.0.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.0.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+
+            <!-- spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+
+            <!-- tomcat-jdbc -->
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jdbc</artifactId>
+                <version>8.0.20</version>
+            </dependency>
+
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.21</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.3.2</version>
+            </dependency>
+
+            <!--######################### json ###########################-->
+            <!-- codehaus json -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <!-- fasterxml json 用2.3.0会有问题,提示找不到方法 Exception in thread "main" java.lang.NoSuchMethodError: com.fasterxml.jackson.core.JsonParser.setCurrentValue
+
+             不加会报406错误提示 org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+            是因为设置了@ResponseBody要把对象转换成json格式,缺少转化依赖的jar包,故出错
+            -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.5.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.5.1</version>
+            </dependency>
+
+            <!--fast json-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.1.28</version>
+            </dependency>
+
+            <!--redis-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!--http client-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.3.1</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>commons-logging</artifactId>
+                        <groupId>commons-logging</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ning</groupId>
+                <artifactId>async-http-client</artifactId>
+                <version>1.9.32</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.netty</groupId>
+                        <artifactId>netty</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.3</version>
+            </dependency>
+
+            <!-- 变更纪录管理框架 http://javers.org 用来diff -->
+            <dependency>
+                <groupId>org.javers</groupId>
+                <artifactId>javers-core</artifactId>
+                <version>1.2.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.9.2</version>
+            </dependency>
+
+            <!-- dbcp 数据源 spring3.1.1与commons-dbcp1.2    http://www.myexception.cn/database/1468766.html-->
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>1.2</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xerces</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--
+                导入 cglib
+            否则会报 org.springframework.aop.framework.AopConfigException:
+            Cannot proxy target class because CGLIB2 is not available. Add CGLIB to the class path or specify proxy interfaces.
+
+                Spring Aop 是以代理的方式实现的Aop,它的实现利用了两个库,一个是java自带的基于接口实现的动态代理,二是cglib提供的基于继承类实现的动态代理
+
+                代理就是通过生成一个与原类型同样接口的类或子类,然后将原类的实例保存一个作为成员变量,然后就可以在调用原先类的方法前后执行我们的操作,相当于装饰器
+            -->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>3.1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <deploy.type>local</deploy.type>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>dev</id>
+            <properties>
+                <deploy.type>dev</deploy.type>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>beta</id>
+            <properties>
+                <deploy.type>beta</deploy.type>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <deploy.type>prod</deploy.type>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/profiles/${deploy.type}</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
+
