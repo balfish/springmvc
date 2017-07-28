@@ -1,12 +1,15 @@
 package com.balfish.hotel.train.eventbus;
 
 import com.google.common.eventbus.AsyncEventBus;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Executors;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
  */
+@Component
 public class MyEventBus {
 
     private final static AsyncEventBus ASYNC_EVENT_BUS = new AsyncEventBus(Executors.newFixedThreadPool(20));

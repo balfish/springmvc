@@ -1,6 +1,8 @@
 package com.balfish.hotel.train.eventbus;
 
 import com.google.common.eventbus.Subscribe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,7 @@ import javax.annotation.PreDestroy;
 @Component
 public class EventBusSpringDemo implements InitializingBean {
 
+    private static final Logger LOGGER  = LoggerFactory.getLogger(EventBusSpringDemo.class);
 
     @PostConstruct
     public void init() {
@@ -24,9 +27,8 @@ public class EventBusSpringDemo implements InitializingBean {
 
     @Subscribe
     public void sayHello(Object object) {
-        System.out.println(object.toString() + "hehe");
+        LOGGER.info(object.toString() + "hehe");
     }
-
 
     @PreDestroy
     public void destroy() {
@@ -34,6 +36,6 @@ public class EventBusSpringDemo implements InitializingBean {
     }
 
     public void afterPropertiesSet() throws Exception {
-        System.out.println("lalalala~~~");
+        LOGGER.info("lalalala~~~");
     }
 }

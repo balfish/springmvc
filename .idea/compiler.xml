@@ -12,7 +12,6 @@
         <module name="main" />
         <module name="model" />
         <module name="service" />
-        <module name="springmvc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
@@ -23,7 +22,7 @@
       <module name="main" target="1.8" />
       <module name="model" target="1.8" />
       <module name="service" target="1.8" />
-      <module name="springmvc" target="1.5" />
+      <module name="springmvc" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
