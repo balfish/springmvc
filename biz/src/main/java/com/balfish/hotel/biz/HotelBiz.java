@@ -2,13 +2,16 @@ package com.balfish.hotel.biz;
 
 import com.balfish.common.template.BizHandleTemplate;
 import com.balfish.common.template.BizProcessCallBackNoResult;
+import com.balfish.hotel.enums.HotelGradeType;
 import com.balfish.hotel.model.HotelEntity;
 import com.balfish.hotel.service.HotelService;
 
 import com.google.common.base.Preconditions;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -47,5 +50,20 @@ public class HotelBiz {
                 // 监控 & 日志
             }
         });
+    }
+
+    @Transactional
+    public void addTx() throws Exception {
+        HotelEntity hotelEntity = new HotelEntity();
+        hotelEntity.setHotelId(2);
+        hotelEntity.setHotelName("1");
+        hotelEntity.setHotelAddress("1");
+        hotelEntity.setHotelPhone("1");
+        hotelEntity.setHotelGradeType(HotelGradeType.STAR_ONE);
+        hotelEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        hotelEntity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+        this.add(hotelEntity);
+
+        throw new Exception("ss");
     }
 }

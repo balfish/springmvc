@@ -14,14 +14,15 @@
                                             classpath:jdbc.properties"
                                   ignore-unresolvable="true"/>
 
-    <context:annotation-config/>
-    <mvc:annotation-driven/>
-
     <!--静态资源访问-->
     <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
 
     <import resource="spring/applicationContext-dao.xml"/>
     <import resource="spring/applicationContext-service.xml"/>
     <import resource="spring/applicationContext-web.xml"/>
     <import resource="spring/applicationContext-myhandler.xml"/>
+    <import resource="spring/applicationContext-aop.xml"/>
+    <import resource="spring/applicationContext-schedule.xml"/>
+
 </beans>

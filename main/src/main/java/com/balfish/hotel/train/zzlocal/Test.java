@@ -1,35 +1,20 @@
 package com.balfish.hotel.train.zzlocal;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
 import org.joda.time.LocalDateTime;
 
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
  */
 public class Test {
 
-    private static final Comparator DESC = new Comparator<Double>() {
-        public int compare(Double left, Double right) {
-            return Doubles.compare(right, left);
-        }
-    };
-
     @SuppressWarnings("unchecked")
-    public static void main(String[] args) throws IOException {
-//        System.out.println(Optional.fromNullable(null).or("default"));
+    public static void main(String[] args) throws Exception {
+        System.out.println(Optional.ofNullable(null).orElse("default"));
 
         ArrayListMultimap<Integer, String> multiMap = ArrayListMultimap.create();
 
@@ -49,26 +34,12 @@ public class Test {
         list.add(2.2);
 
         System.out.println(list);
-        sort(list, Test.DESC);
+        sort(list, (left, right) -> Doubles.compare(right, left));
         System.out.println(list);
 
 
         System.out.println(LocalDateTime.now().plusHours(8).toString("yyyy年MM月dd日 HH:mm:ss"));
         System.out.println(LocalDateTime.now().plusHours(9).toString("yyyy年MM月dd日 HH:mm:ss"));
-
-        System.out.println(new Timestamp(1491375639000L).toString());
-
-
-        List<Integer> rids = Collections.emptyList();
-
-        ImmutableList<Integer> resourceEntityList = FluentIterable.from(rids)
-                .transform(new Function<Integer, Integer>() {
-                    public Integer apply(Integer rid) {
-                        return null;
-                    }
-                }).toSet().asList();
-
-        System.out.println(resourceEntityList);
     }
 
 
@@ -82,6 +53,4 @@ public class Test {
             iterator.set(anArray);
         }
     }
-
-
 }

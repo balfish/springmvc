@@ -16,7 +16,15 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--interceptors-->
+    <!--局部interceptors-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login"/>
+            <bean class="com.balfish.hotel.interceptor.MonitorInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--全局interceptors-->
     <mvc:interceptors>
         <bean class="com.balfish.hotel.interceptor.MonitorInterceptor"/>
         <bean class="com.balfish.hotel.interceptor.CookieInterceptor"/>

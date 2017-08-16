@@ -7,14 +7,15 @@ import com.balfish.hotel.interceptor.Monitor;
 import com.balfish.hotel.train.pipehandler.HandlerPipeline;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,17 +25,20 @@ import java.util.Map;
 @RequestMapping("hotel")
 public class HotelController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HotelController.class);
+
     @Resource
     private HotelBiz hotelBiz;
 
-    //http://localhost:8080/balfish/hotel/test
+    //http://localhost:8080/hotel/test
     @RequestMapping(value = "test", method = RequestMethod.GET)
     @ResponseBody
     public String test() {
+        LOGGER.info("http://localhost:8080/hotel/test...");
         return "testString";
     }
 
-    //http://localhost:8080/balfish/hotel/modelAndView
+    //http://localhost:8080/hotel/modelAndView
     @RequestMapping(value = "modelAndView", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView modelAndView() {
@@ -44,7 +48,7 @@ public class HotelController {
         return modelAndView;
     }
 
-    //http://localhost:8080/balfish/hotel/query?id=1
+    //http://localhost:8080/hotel/query?id=1
     @RequestMapping(value = "query")
     @ResponseBody
     public ApiResult query(@RequestParam(value = "id", required = true) Integer id) {
@@ -52,7 +56,7 @@ public class HotelController {
     }
 
 
-    //http://localhost:8080/balfish/hotel/addnull
+    //http://localhost:8080/hotel/addnull
     @RequestMapping(value = "addnull")
     @ResponseBody
     public ApiResult addnull() {
@@ -60,7 +64,7 @@ public class HotelController {
         return ApiResult.buildSuccessResult();
     }
 
-    //http://localhost:8080/balfish/hotel/event
+    //http://localhost:8080/hotel/event
     @RequestMapping(value = "event")
     @ResponseBody
     public ApiResult event() {
@@ -68,7 +72,7 @@ public class HotelController {
         return ApiResult.buildSuccessResult();
     }
 
-    //http://localhost:8080/balfish/hotel/handler   result:{"ver":"1.0","status":0,"data":"aa1122cc33"}
+    //http://localhost:8080/hotel/handler   result:{"ver":"1.0","status":0,"data":"aa1122cc33"}
     @Resource
     private HandlerPipeline handlerPipeline;
 
@@ -81,7 +85,7 @@ public class HotelController {
         return ApiResult.buildSuccessResult(s);
     }
 
-    //http://localhost:8080/balfish/hotel/monitor　这个需要ｘ掉全局的异常处理
+    //http://localhost:8080/hotel/monitor　这个需要ｘ掉全局的异常处理
     @RequestMapping(value = "monitor")
     @ResponseBody
     @Monitor(onSucc = "succeed", onFail = "failed")
@@ -95,7 +99,7 @@ public class HotelController {
 
     private static RateLimiter rateLimiter = RateLimiter.create(0.1);
 
-    //http://localhost:8080/balfish/hotel/rateLimitter　
+    //http://localhost:8080/hotel/rateLimitter　
     @RequestMapping(value = "rateLimitter")
     @ResponseBody
     public ApiResult rateLimiter() {
@@ -103,5 +107,34 @@ public class HotelController {
             return ApiResult.buildFailedResult("繁忙, 请稍候");
         }
         return ApiResult.buildSuccessResult("请求成功！");
+    }
+
+    @RequestMapping(value = "testt/{type}", method = RequestMethod.GET)
+    @ResponseBody
+    public String test(@RequestParam(required = false) String type) {
+        String type1 = type;
+        LOGGER.info("http://localhost:8080/hotel/test...");
+        return "testString";
+    }
+
+    @RequestMapping(value = "test11", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult<List<String>> test11(@RequestParam("list") List<String> list) {
+        LOGGER.info("http://localhost:8080/hotel/test...");
+        list.add(list.get(1) + "手术室");
+        return ApiResult.buildSuccessResult(list);
+    }
+
+    //http://localhost:8080/hotel/tx
+    @RequestMapping(value = "tx")
+    @ResponseBody
+    public ApiResult tx(HttpServletRequest httpServletRequest) {
+
+        try {
+            hotelBiz.addTx();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ApiResult.buildSuccessResult(httpServletRequest.getRemoteAddr());
     }
 }

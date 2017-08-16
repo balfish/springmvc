@@ -63,7 +63,7 @@
             `create_time`,
         </if>
         <if test="updateTime != null">
-            `update_time`,
+            `update_time`
         </if>
         )
         VALUES (
@@ -86,7 +86,7 @@
             #{createTime},
         </if>
         <if test="updateTime != null">
-            #{updateTime},
+            #{updateTime}
         </if>
         )
     </insert>
