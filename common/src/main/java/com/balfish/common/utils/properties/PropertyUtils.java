@@ -20,7 +20,7 @@ import java.util.TreeMap;
  */
 public class PropertyUtils {
 
-    public static final String DEFAULT_PROPERTY_FILE = "xx.properties";
+    private static final String DEFAULT_PROPERTY_FILE = "xx.properties";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtils.class);
 

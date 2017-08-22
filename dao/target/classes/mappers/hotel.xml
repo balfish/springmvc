@@ -41,6 +41,20 @@
         </where>
     </select>
 
+    <select id="queryIds" resultMap="hotelEntity">
+        SELECT
+        <include refid="allFields"/>
+        FROM
+        `hotel`
+        where id in
+        <foreach collection = "idList" item = "id" index = "index" separator = "," open="(" close=")" >
+        <!--<foreach collection = "idList" item = "id" index = "index" separator = "," >-->
+            #{id}
+        </foreach>
+
+    </select>
+
+
     <insert id="add" parameterType="com.balfish.hotel.model.HotelEntity">
         INSERT INTO `hotel`
         (

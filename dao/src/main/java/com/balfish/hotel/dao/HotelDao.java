@@ -2,6 +2,7 @@ package com.balfish.hotel.dao;
 
 import com.balfish.hotel.model.HotelEntity;
 import org.apache.ibatis.annotations.Param;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface HotelDao {
     List<HotelEntity> query(@Param("id") Integer id);
 
     void add(HotelEntity hotelEntity);
+
+    List<HotelEntity> queryIds(@Param("idList") List<Integer> idList);
 }

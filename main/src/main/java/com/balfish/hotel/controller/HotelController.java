@@ -2,11 +2,14 @@ package com.balfish.hotel.controller;
 
 import com.balfish.common.ApiResult;
 import com.balfish.hotel.biz.HotelBiz;
+import com.balfish.hotel.dao.HotelDao;
+import com.balfish.hotel.model.HotelEntity;
 import com.balfish.hotel.train.eventbus.MyEventBus;
 import com.balfish.hotel.interceptor.Monitor;
 import com.balfish.hotel.train.pipehandler.HandlerPipeline;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
+import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +33,9 @@ public class HotelController {
 
     @Resource
     private HotelBiz hotelBiz;
+
+    @Resource
+    private HotelDao hotelDao;
 
     //http://localhost:8080/hotel/test
     @RequestMapping(value = "test", method = RequestMethod.GET)
@@ -52,7 +59,9 @@ public class HotelController {
     @RequestMapping(value = "query")
     @ResponseBody
     public ApiResult query(@RequestParam(value = "id", required = true) Integer id) {
-        return ApiResult.buildSuccessResult(hotelBiz.query(id));
+        List<HotelEntity> hotelEntities = hotelDao.queryIds(Arrays.asList(4, 6, 7));
+        hotelBiz.query(id);
+        return ApiResult.buildSuccessResult(hotelEntities);
     }
 
 
@@ -132,8 +141,9 @@ public class HotelController {
 
         try {
             hotelBiz.addTx();
+            int i = 1 /0;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("e = {}", e);
         }
         return ApiResult.buildSuccessResult(httpServletRequest.getRemoteAddr());
     }

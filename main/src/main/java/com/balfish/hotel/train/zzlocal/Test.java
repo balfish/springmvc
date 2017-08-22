@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
 import org.joda.time.LocalDateTime;
 
+import java.nio.ByteBuffer;
 import java.util.*;
 
 /**
@@ -40,6 +41,20 @@ public class Test {
 
         System.out.println(LocalDateTime.now().plusHours(8).toString("yyyy年MM月dd日 HH:mm:ss"));
         System.out.println(LocalDateTime.now().plusHours(9).toString("yyyy年MM月dd日 HH:mm:ss"));
+
+
+        System.out.println(1.123456789D);
+        System.out.println(1.123456789);
+
+        System.out.println(ByteBuffer.wrap(new byte[] {0,0,0,1}).getInt());
+
+        System.out.println("---");
+
+        byte[] btVal = new byte[8];
+        ByteBuffer.wrap(btVal).putDouble(15);
+        for (byte b : btVal) {
+            System.out.println(b);
+        }
     }
 
 

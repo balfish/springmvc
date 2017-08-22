@@ -10,14 +10,15 @@ import java.io.Serializable;
  */
 public class HttpClientResponse implements Serializable {
 
-    public static final int STATUS_ERROR = -1;
-    public static final int STATUS_OK = 200;
+    private static final int STATUS_ERROR = -1;
+    private static final int STATUS_OK = 200;
+    private static final long serialVersionUID = 109888044977284411L;
 
     private int status;
     private String message;
     private String content;
 
-    public HttpClientResponse(int status, String message, String content) {
+    private HttpClientResponse(int status, String message, String content) {
         this.status = status;
         this.message = message;
         this.content = content;
