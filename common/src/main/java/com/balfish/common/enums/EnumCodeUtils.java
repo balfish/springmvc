@@ -66,12 +66,8 @@ public class EnumCodeUtils {
             return null;
         }
         for (T enumConstant : enumConstants) {
-            try {
-                if (Objects.equal(code, enumConstant.getCode())) {
-                    return enumConstant;
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (Objects.equal(code, enumConstant.getCode())) {
+                return enumConstant;
             }
         }
         return null;

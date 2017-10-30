@@ -41,10 +41,10 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
         return fillErrorMessage(mv, e.getMessage());
     }
 
-    private ModelAndView fillErrorMessage(ModelAndView mv, String errmsg) {
+    private ModelAndView fillErrorMessage(ModelAndView mv, String errMsg) {
         mv.addObject("ver", "1.0");
         mv.addObject("status", -1);
-        mv.addObject("errmsg", errmsg);
+        mv.addObject("errMsg", errMsg);
         return mv;
     }
 

@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
     /**
      * 颜色枚举
      */
-    public enum Color {
+    enum Color {
         BLUE, RED, GREEN
     }
 

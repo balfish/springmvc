@@ -90,7 +90,7 @@ public class BizHandleTemplate {
 
             // 执行业务操作
             {
-                result = (T) action.process();
+                result = action.process();
             }
 
             // 监控成功结果

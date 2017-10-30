@@ -45,7 +45,7 @@
 
     <typeHandlers>
         <typeHandler handler="com.balfish.common.enums.CodeEnumHandler"
-                     javaType="com.balfish.hotel.enums.HotelGradeType"></typeHandler>
+                     javaType="com.balfish.hotel.enums.HotelGradeType"/>
 
         <!--<typeHandler handler="org.apache.ibatis.type.ObjectTypeHandler"-->
         <!--javaType="com.balfish.hotel.enums.HotelGradeType"></typeHandler>-->

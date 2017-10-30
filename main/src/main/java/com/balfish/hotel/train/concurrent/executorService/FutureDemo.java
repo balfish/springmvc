@@ -87,12 +87,7 @@ public class FutureDemo {
 
     // 在jvm增加一个关闭的钩子，执行完这些hook后jvm才能关闭. 所以这些钩子可以在jvm关闭的时候进行内存清理，对象销毁等操作.
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                executorService.shutdown();
-            }
-        });
+        Runtime.getRuntime().addShutdownHook(new Thread(executorService::shutdown));
     }
 
     public static void main(String[] args) throws Exception {

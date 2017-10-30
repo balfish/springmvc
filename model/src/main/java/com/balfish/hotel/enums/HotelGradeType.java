@@ -2,6 +2,8 @@ package com.balfish.hotel.enums;
 
 import com.balfish.common.enums.EnumTrait;
 
+import java.util.Arrays;
+
 /**
  * Created by yhm on 2017/7/12 PM2:17
  */
@@ -19,12 +21,7 @@ public enum HotelGradeType implements EnumTrait {
     }
 
     public static HotelGradeType codeOf(int code) {
-        for (HotelGradeType hotelGradeType : HotelGradeType.values()) {
-            if (hotelGradeType.getCode() == code) {
-                return hotelGradeType;
-            }
-        }
-        return null;
+        return Arrays.stream(HotelGradeType.values()).filter(h -> h.getCode() == code).findAny().orElse(null);
     }
 
     public int getCode() {

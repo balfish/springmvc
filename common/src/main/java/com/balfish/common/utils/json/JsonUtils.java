@@ -1,6 +1,5 @@
 package com.balfish.common.utils.json;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.Version;
@@ -9,14 +8,9 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
@@ -71,10 +65,8 @@ public class JsonUtils {
 
     /**
      * 反序列化集合类型(List,Set,Map等泛型类)
-     * <p/>
      * <pre>
-     *  如：List<PromotionViewInfo> infos = toBean(json,ArrayList.class, PromotionViewInfo.class)
-     *  List<Placeholder> placeholders = JsonUtil.toBean(content, ArrayList.class, Placeholder.class);
+     *  如: List<Placeholder> placeholders = JsonUtil.toBean(content, ArrayList.class, Placeholder.class);
      * </pre>
      */
     public static <T> T toBean(String json, Class<?> parametrized, Class<?>... parameterClasses) {
@@ -88,24 +80,5 @@ public class JsonUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) {
-
-//        List<Map<String, Integer>> list = Lists.newArrayList();
-//        Map<String, Integer> map1 = Maps.newHashMap();
-//        map1.put("aaa", 1);
-//        map1.put("bbb", 2);
-
-        List<Integer> list = Collections.emptyList();
-
-
-        System.out.println(toJson(list));
-
-        System.out.println(System.currentTimeMillis() + 300000);
-
-//        for(;;) {
-//            String str = new String("12333333333333333333333333333333333333333333333333333333333333333");
-//        }
     }
 }
