@@ -37,24 +37,11 @@ public class Test {
         System.out.println(list);
         sort(list, (left, right) -> Doubles.compare(right, left));
         System.out.println(list);
+//        Collections.sort();
 
 
         System.out.println(LocalDateTime.now().plusHours(8).toString("yyyy年MM月dd日 HH:mm:ss"));
         System.out.println(LocalDateTime.now().plusHours(9).toString("yyyy年MM月dd日 HH:mm:ss"));
-
-
-        System.out.println(1.123456789D);
-        System.out.println(1.123456789);
-
-        System.out.println(ByteBuffer.wrap(new byte[] {0,0,0,1}).getInt());
-
-        System.out.println("---");
-
-        byte[] btVal = new byte[8];
-        ByteBuffer.wrap(btVal).putDouble(15);
-        for (byte b : btVal) {
-            System.out.println(b);
-        }
     }
 
 

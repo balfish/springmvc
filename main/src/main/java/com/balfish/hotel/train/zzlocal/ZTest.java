@@ -26,11 +26,7 @@ public class ZTest {
         System.out.println(result);
 
 
-        Thread thread = new Thread() {
-            public void run() {
-                System.out.println("dsds");
-            }
-        };
+        Thread thread = new Thread(() -> System.out.println("dsds"));
         thread.start();
 
         HashMap<Integer, Integer> map = new HashMap<>();
