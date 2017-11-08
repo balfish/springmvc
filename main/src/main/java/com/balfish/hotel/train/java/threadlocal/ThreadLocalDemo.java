@@ -17,16 +17,27 @@ public class ThreadLocalDemo {
 
 
     public static void main(String[] args) throws InterruptedException {
-        final ThreadLocalDemo threadLocalDemo = new ThreadLocalDemo();
 
-        Thread thread = new Thread(() -> {
+        final ThreadLocalDemo threadLocalDemo = new ThreadLocalDemo();
+        threadLocalDemo.setValue();
+
+        Thread thread1 = new Thread(() -> {
             threadLocalDemo.setValue();
             System.out.println(threadLocalDemo.getName());
 
         });
 
-        thread.start();
-        thread.join();
+        thread1.start();
+        thread1.join();
+
+        Thread thread2 = new Thread(() -> {
+            threadLocalDemo.setValue();
+            System.out.println(threadLocalDemo.getName());
+
+        });
+
+        thread2.start();
+        thread2.join();
         System.out.println(threadLocalDemo.getName());
     }
 
