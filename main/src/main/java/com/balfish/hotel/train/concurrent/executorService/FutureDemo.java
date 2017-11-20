@@ -15,7 +15,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +48,6 @@ import java.util.concurrent.TimeUnit;
  *                       将Runnable的对象传递给ExecutorService的submit方法，则该 run方法自动在一个线程上执行，并且会返回执行结果Future对象，但是在该Future对象上调用get方法，将返回null。
  *
  *
- *
  *                       Java通过Executors提供四种线程池，分别为(@see java.util.concurrent.Executors):
  *                       newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
  *                       newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
@@ -78,11 +76,9 @@ import java.util.concurrent.TimeUnit;
 public class FutureDemo {
 
     private final static int DEFAULT_THREAD_POOL_SIZE = Math.min(Runtime.getRuntime().availableProcessors() * 2, 8);
-    private final static ThreadFactory THREAD_FACTORY = Executors.defaultThreadFactory();
 
-    // thread pool
     private final static ExecutorService executorService = new ThreadPoolExecutor(DEFAULT_THREAD_POOL_SIZE,
-            DEFAULT_THREAD_POOL_SIZE, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(), THREAD_FACTORY,
+            DEFAULT_THREAD_POOL_SIZE, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<>(), Executors.defaultThreadFactory(),
             new ThreadPoolExecutor.CallerRunsPolicy());
 
     // 在jvm增加一个关闭的钩子，执行完这些hook后jvm才能关闭. 所以这些钩子可以在jvm关闭的时候进行内存清理，对象销毁等操作.
@@ -105,6 +101,7 @@ public class FutureDemo {
 
         final ListenableFuture<Integer> listenableFuture = listeningExecutorService.submit(new Callable<Integer>() {
             public Integer call() throws Exception {
+                System.out.println("-------");
                 TimeUnit.SECONDS.sleep(15);
                 return 6;
             }
@@ -114,6 +111,7 @@ public class FutureDemo {
         listenableFuture.addListener(new Runnable() {
             public void run() {
                 try {
+                    System.out.println("-------！！！！！！！");
                     TimeUnit.SECONDS.sleep(5);
                     System.out.println("get listenable future's result with addListener " + listenableFuture.get());
                 } catch (InterruptedException e) {

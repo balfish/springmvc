@@ -48,25 +48,11 @@ public class CyclicBarrierDemo {
     }
 
     public static void main(String[] args) {
-//        CyclicBarrier cb = new CyclicBarrier(THREAD_NUM, new Runnable() {
-//            //当所有线程到达barrier时执行
-//            @Override
-//            public void run() {
-//                System.out.println("Inside Barrier");
-//            }
-//        });
-//
-//        for (int i = 0; i < THREAD_NUM; i++) {
-//            new Thread(new WorkerThread(cb)).start();
-//        }
+        //当所有线程到达barrier时执行
+        CyclicBarrier cb = new CyclicBarrier(THREAD_NUM, () -> System.out.println("Inside Barrier"));
 
-        try {
-            throw new RuntimeException("fist");
-        } catch (RuntimeException e) {
-            throw new RuntimeException("second");
-        } catch (Exception e) {
-            System.out.println("heeh");
-            //ignore
+        for (int i = 0; i < THREAD_NUM; i++) {
+            new Thread(new WorkerThread(cb)).start();
         }
     }
 }

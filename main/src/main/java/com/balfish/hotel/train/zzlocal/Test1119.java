@@ -3,15 +3,13 @@ package com.balfish.hotel.train.zzlocal;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Doubles;
-import org.joda.time.LocalDateTime;
 
-import java.nio.ByteBuffer;
 import java.util.*;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
  */
-public class Test {
+public class Test1119 {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
@@ -37,14 +35,16 @@ public class Test {
         System.out.println(list);
         sort(list, (left, right) -> Doubles.compare(right, left));
         System.out.println(list);
-//        Collections.sort();
-
-
-        System.out.println(LocalDateTime.now().plusHours(8).toString("yyyy年MM月dd日 HH:mm:ss"));
-        System.out.println(LocalDateTime.now().plusHours(9).toString("yyyy年MM月dd日 HH:mm:ss"));
     }
 
 
+    /**
+     * Collections.sort(List<T> list, Comparator<? super T> c)的底层实现
+     *
+     * @param list 列表
+     * @param c    比较器
+     * @param <T>  泛型
+     */
     @SuppressWarnings("unchecked")
     private static <T> void sort(List<T> list, Comparator<? super T> c) {
         Object[] array = list.toArray();

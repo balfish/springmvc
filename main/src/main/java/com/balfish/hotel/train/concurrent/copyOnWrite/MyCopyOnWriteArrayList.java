@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class MyCopyOnWriteArrayList<E> {
 
-    transient final ReentrantLock reentrantLock = new ReentrantLock();
+    private transient final ReentrantLock reentrantLock = new ReentrantLock();
 
     private volatile transient Object[] array;
 
@@ -68,9 +68,7 @@ public class MyCopyOnWriteArrayList<E> {
             System.arraycopy(elements, 0, a, 0, len);
             return a;
         }
-
     }
-
 
     @SuppressWarnings("unchecked")
     private E get(Object[] a, int index) {
@@ -117,7 +115,6 @@ public class MyCopyOnWriteArrayList<E> {
             reentrantLock.unlock();
         }
     }
-
 
     public E remove(int index) {
         final ReentrantLock reentrantLock = this.reentrantLock;

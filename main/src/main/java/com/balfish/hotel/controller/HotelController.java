@@ -106,7 +106,7 @@ public class HotelController {
         return ApiResult.buildSuccessResult(i);
     }
 
-    private static RateLimiter rateLimiter = RateLimiter.create(0.1);
+    private static RateLimiter rateLimiter = RateLimiter.create(0.2);
 
     //http://localhost:8080/hotel/rateLimitter　
     @RequestMapping(value = "rateLimitter")
