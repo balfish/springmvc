@@ -67,8 +67,8 @@ public class GuavaDemo {
      * </pre>
      */
     private static void unmodifiableAndImmutableDemo() {
-        unmodifiableDemo();
-//        immutableDemo();
+//        unmodifiableDemo();
+        immutableDemo();
     }
 
     private static void immutableDemo() {
@@ -97,7 +97,7 @@ public class GuavaDemo {
     }
 
     private static void unmodifiableDemo() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
@@ -111,7 +111,7 @@ public class GuavaDemo {
         System.out.println("list add a item after list:" + list);
         System.out.println("list add a item after unmodifiableList:" + unmodifiableList);
 
-        /** 下面两句均会抛异常 */
+        // 下面两句均会抛异常
         unmodifiableList1.add("bb");
         System.out.println("unmodifiableList1 add a item after list:" + unmodifiableList1);
 

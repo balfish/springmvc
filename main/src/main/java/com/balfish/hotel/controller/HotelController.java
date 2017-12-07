@@ -7,20 +7,29 @@ import com.balfish.hotel.model.HotelEntity;
 import com.balfish.hotel.train.eventbus.MyEventBus;
 import com.balfish.hotel.interceptor.Monitor;
 import com.balfish.hotel.train.pipehandler.HandlerPipeline;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
 import javafx.util.Pair;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
@@ -141,10 +150,52 @@ public class HotelController {
 
         try {
             hotelBiz.addTx();
-            int i = 1 /0;
+            int i = 1 / 0;
         } catch (Exception e) {
             LOGGER.error("e = {}", e);
         }
         return ApiResult.buildSuccessResult(httpServletRequest.getRemoteAddr());
+    }
+
+
+    //http://localhost:8080/hotel/eb/redirect?continue=http://www.meituan1.com?param1=value1&param2=value2
+    @RequestMapping(value = "/eb/redirect")
+    public ResponseEntity redirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+
+        if (1 == 1)
+        return new ResponseEntity(HttpStatus.FORBIDDEN);
+
+        String url = httpServletRequest.getParameter("continue");
+
+        StringBuilder paramStr = new StringBuilder();
+        Map parameterMap = httpServletRequest.getParameterMap();
+
+
+        Cookie[] cookies = httpServletRequest.getCookies();
+        for (Cookie cookie: cookies) {
+            if (StringUtils.equals("ebbsid", cookie.getName())){
+                url += "&" +  cookie.getName() + cookie.getValue();
+                break;
+            }
+        }
+
+
+
+        try {
+            httpServletResponse.sendRedirect(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        double a = 23.36;
+
+        String b = String.valueOf(a);
+
+        String d = b.substring(0, b.lastIndexOf("."));
+        System.out.println(d);
+
     }
 }
