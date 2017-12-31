@@ -8,4 +8,8 @@ public class Test1205<T> {
     public static <T> byte[] Serialize(T object) {
         return null;
     }
+
+    private <T> T service() {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.balfish.common.utils.json;
 
+import com.balfish.common.ApiResult;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.Version;
@@ -80,5 +81,38 @@ public class JsonUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void main(String[] args) {
+        String xx = toJson(ApiResult.buildSuccessResult(new User("xx", 12)));
+        System.out.println(xx);
+    }
+}
+
+
+class User {
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    private String name;
+    private int age;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

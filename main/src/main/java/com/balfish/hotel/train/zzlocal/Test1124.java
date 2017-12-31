@@ -2,6 +2,7 @@ package com.balfish.hotel.train.zzlocal;
 
 import com.balfish.common.ApiResult;
 import com.balfish.common.utils.json.JsonUtils;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
@@ -9,6 +10,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Created by yhm on 2017/11/24 AM11:08.
@@ -43,7 +45,7 @@ public class Test1124 {
 
         String json = JsonUtils.toJson(immutableTriple);
         System.out.println(json);
-        Triple triple1 = JsonUtils.toBean(json, ImmutableTriple.class, Integer.class, Integer.class, Integer.class);
+//        Triple triple1 = JsonUtils.toBean(json, ImmutableTriple.class, Integer.class, Integer.class, Integer.class);
 
 //
 //        System.out.println("------------------------");
@@ -70,7 +72,16 @@ public class Test1124 {
         System.out.println(judgeUri1);
         System.out.println(judgeUri2);
 
+        List<String> list = Lists.newArrayList();
 
+        System.out.println(getDispMobile("18514594686"));
+
+
+    }
+
+
+    private static String getDispMobile(String mobile) {
+        return mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
 
 }

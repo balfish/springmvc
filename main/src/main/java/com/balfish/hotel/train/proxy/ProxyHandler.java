@@ -2,10 +2,7 @@ package com.balfish.hotel.train.proxy;
 
 import com.google.common.collect.Maps;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.Map;
 
 /**
@@ -20,44 +17,46 @@ import java.util.Map;
  * @see https://www.zhihu.com/question/20794107/answer/23334315
  */
 public class ProxyHandler implements InvocationHandler {
-    private Map<String, Object> cache = Maps.newHashMap();
     private Object target;
 
     public Object bind(Object target) {
         this.target = target;
 
+        System.out.println("----" + target.getClass().getName());
+        System.out.println("----" + target.getClass().getInterfaces()[0]);
         return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         beforeMethod();
-        /** 考虑以下各种情况，有多个提供类，每个类都有getXxx(String name)方法，每个类都要加入缓存功能，使用静态代理虽然也能实现，但是也是略显繁琐，需要手动一一创建代理类, 用下面的方法*/
-        Type[] types = method.getParameterTypes();
-        if (method.getName().matches("get.+") && (types.length == 1) && (types[0] == String.class)) {
-            String key = (String) args[0];
-            Object value = cache.get(key);
-            if (value == null) {
-                value = method.invoke(target, args);
-                cache.put(key, value);
-            }
-            return value;
-        }
-        afterMethod();
         return method.invoke(target, args);
-    }
-
-    private void afterMethod() {
-        System.out.println("after method...");
     }
 
     private void beforeMethod() {
         System.out.println("before method...");
     }
-
-    public static void main(String[] args) {
-        ProxyHandler proxyHandler = new ProxyHandler();
-        SubjectProvider subjectProvider = (SubjectProvider) proxyHandler.bind(new QmqSubjectProvider());
-        System.out.println(subjectProvider.getSubject("1"));
-    }
 }
+
+
+    //    private Map<String, Object> cache = Maps.newHashMap();
+
+//    @Override
+//    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//        beforeMethod();
+//        /* 考虑以下各种情况，有多个提供类，每个类都有getXxx(String name)方法，每个类都要加入缓存功能，
+//         使用静态代理虽然也能实现，但是也是略显繁琐，需要手动一一创建代理类, 用下面的方法 */
+//        Type[] types = method.getParameterTypes();
+//        if (method.getName().matches("get.+") && (types.length == 1) && (types[0] == String.class)) {
+//            String key = (String) args[0];
+//            Object value = cache.get(key);
+//            if (value == null) {
+//                value = method.invoke(target, args);
+//                cache.put(key, value);
+//            }
+//            return value;
+//        }
+//        afterMethod();
+//        return method.invoke(target, args);
+//    }
+//}
