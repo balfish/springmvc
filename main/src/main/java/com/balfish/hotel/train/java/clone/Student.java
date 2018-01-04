@@ -2,11 +2,7 @@ package com.balfish.hotel.train.java.clone;
 
 import com.balfish.common.utils.clone.CloneUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -37,7 +33,7 @@ public class Student implements Serializable, Cloneable {
     public int age;
     public Professor p;
 
-    // 构造函数是为了CloneUtils工具类clazz.instance()方法调用 &  json序列化使用
+    // 构造函数是为了CloneUtils工具类clazz.instance()方法调用 & json序列化使用
     public Student() {
     }
 
@@ -51,16 +47,6 @@ public class Student implements Serializable, Cloneable {
         Student s = (Student) super.clone();
         //s.p = (Professor) p.clone();  //这句加上就是深拷贝了
         return s;
-    }
-
-    // 序列化形式的深拷贝
-    public Object deepClone() throws IOException, ClassNotFoundException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(this);
-
-        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
-        return objectInputStream.readObject();
     }
 }
 
