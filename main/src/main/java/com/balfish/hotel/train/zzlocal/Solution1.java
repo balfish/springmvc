@@ -9,6 +9,8 @@ public class Solution1 {
         System.out.println(isSucc(new int[]{1, 2, 2, 2, 3}));
         System.out.println(isSucc(new int[]{1, 2, 2, 3, 3}));
         System.out.println(isSucc(new int[]{1, 5, 5, 3, 4}));
+        System.out.println(isSucc(new int[]{9, 9, 6, 8, 5}));
+
     }
 
     private static boolean isSucc(int[] array) {

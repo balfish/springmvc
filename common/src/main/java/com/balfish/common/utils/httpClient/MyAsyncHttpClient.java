@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
  * MyAsyncHttpClient asyncHttpClient = MyAsyncHttpClient.createMyAsyncHttpClient(1000, 5000, 100);
  * HashMap<String, String> headers = Maps.newHashMapWithExpectedSize(1);
  * headers.put(HTTP.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
- * ListenableFuture<String> future3 = asyncHttpClient.httpPost("http://lock.proxy.ep.ia.hoteltest.meituan.com/api/v1/cdb/battery/queryUrl",
+ * ListenableFuture<String> future3 = asyncHttpClient.httpPost("http://xxx/api/v1/cdb/battery/queryUrl",
  * headers,
  * null,
  * "{\"cabinIdList\": [\"B00000100003\"]}",
