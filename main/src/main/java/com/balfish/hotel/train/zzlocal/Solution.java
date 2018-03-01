@@ -1,8 +1,6 @@
 package com.balfish.hotel.train.zzlocal;
 
-import com.google.common.collect.Sets;
-
-import java.util.*;
+import java.util.Stack;
 
 /**
  * Created by yhm on 2018/1/2 AM11:36.
@@ -10,77 +8,87 @@ import java.util.*;
  * 专为leetcode刷题的类
  * 好好算法，天天向上 -v-
  */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
 public class Solution {
 
     public static void main(String[] args) {
+        TreeNode treeNode1 = new TreeNode(1);
+        TreeNode treeNode2 = new TreeNode(2);
+        TreeNode treeNode3 = new TreeNode(2);
+        TreeNode treeNode4 = new TreeNode(3);
+        TreeNode treeNode5 = new TreeNode(4);
+        TreeNode treeNode6 = new TreeNode(4);
+        TreeNode treeNode7 = new TreeNode(3);
 
-        int array[] = new int[]{3, 2, 1, 8, 9, 6, 7};
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
 
-        bubbleSortV2(array);
-        for (int element : array) {
-            System.out.print(element + " ");
+        treeNode2.left = treeNode4;
+        treeNode2.right = treeNode5;
+
+        treeNode3.left = treeNode6;
+        treeNode3.right = treeNode7;
+
+        treeNode4.left = null;
+        treeNode4.right = null;
+
+        treeNode5.left = null;
+        treeNode5.right = null;
+
+        treeNode6.left = null;
+        treeNode6.right = null;
+
+        treeNode7.left = null;
+        treeNode7.right = null;
+
+        print(treeNode1);
+        System.out.println("---------");
+        print1(treeNode1);
+    }
+
+
+    public static void print(TreeNode node) {
+        System.out.println(node.val);
+
+        if (node.left != null) {
+            print(node.left);
         }
+
+        if (node.right != null) {
+            print(node.right);
+        }
+
     }
 
-    private static void swap(int array[], int left, int right) {
-        int tmp = array[left];
-        array[left] = array[right];
-        array[right] = tmp;
-    }
+    public static void print1(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(node);
 
-    /**
-     * 逆序的冒泡
-     *
-     * @param array 数组
-     */
-    private static void bubbleSort(int array[]) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = array.length - 1; j > i; j--) {
-                if (array[j] < array[j - 1]) {
-                    swap(array, j, j - 1);
-                }
+        while (!stack.empty()) {
+            TreeNode tmpNode = stack.pop();
+            System.out.println(tmpNode.val);
+
+            if (tmpNode.right != null) {
+                stack.push(tmpNode.right);
+            }
+            if (tmpNode.left != null) {
+                stack.push(tmpNode.left);
             }
         }
     }
 
-    /**
-     * 优化版的冒泡 如果某次遍历没有一个元素进行了交换，那么认为之后的均有序，提前剪枝
-     *
-     * @param array 数组
-     */
-    private static void bubbleSortV2(int array[]) {
-        boolean flag = true;
-        for (int i = 0; i < array.length && flag; i++) {
-            flag = false;
-            for (int j = array.length - 1; j > i; j--) {
-                if (array[j] < array[j - 1]) {
-                    swap(array, j, j - 1);
-                    flag = true;
-                }
 
-
-            }
-        }
+    public static boolean isSymmetric(TreeNode root) {
+        return false;
     }
 
-    /**
-     * 选择排序
-     *
-     * @param array 数组
-     */
-    private static void selectSort(int array[]) {
-        //选择排序
-        int min;
-        for (int i = 0; i < array.length - 1; i++) {
-            min = i;
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[j] < array[min]) {
-                    min = j;
-                }
-            }
-            if (min != i) {
-                swap(array, min, i);
-            }
-        }
-    }
 }

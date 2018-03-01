@@ -247,5 +247,11 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>ex</groupId>
+            <artifactId>ex</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 </project>

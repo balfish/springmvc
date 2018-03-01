@@ -6,10 +6,14 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
+import org.apache.ibatis.cache.TransactionalCacheManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,6 +79,22 @@ public class Test1124 {
         List<String> list = Lists.newArrayList();
 
         System.out.println(getDispMobile("18514594686"));
+
+
+        TransactionalCacheManager transactionalCacheManager = new TransactionalCacheManager();
+
+        try {
+            Arrays.asList(1, 2, 3).parallelStream().forEach(thread -> {
+                // do something
+            });
+
+            transactionalCacheManager.commit();
+        } catch (Exception e) {
+            transactionalCacheManager.rollback();
+        }
+
+
+
 
 
     }
