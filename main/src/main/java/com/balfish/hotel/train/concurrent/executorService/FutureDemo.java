@@ -64,13 +64,13 @@ import java.util.concurrent.TimeUnit;
      * 当线程池中的数量等于最大线程数时抛出java.util.concurrent.RejectedExecutionException异常.
      * 涉及到该异常的任务也不会被执行.
      *
-     * ThreadPoolExecutor.CallerRunsPolicy():
+     * ThreadPoolExecutor.CallerRunsPolicy:
      * 当线程池中的数量等于最大线程数时,重试添加当前的任务;它会自动重复调用execute()方法
      *
-     * ThreadPoolExecutor.DiscardOldestPolicy():
+     * ThreadPoolExecutor.DiscardOldestPolicy:
      * 当线程池中的数量等于最大线程数时,抛弃线程池中工作队列头部的任务(即等待时间最久Oldest的任务),并执行新传入的任务
      *
-     * ThreadPoolExecutor.DiscardPolicy():
+     * ThreadPoolExecutor.DiscardPolicy:
      * 当线程池中的数量等于最大线程数时,丢弃不能执行的新加任务
      */
 public class FutureDemo {
