@@ -1,5 +1,7 @@
 package com.balfish.hotel.zzAlgorithm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -38,27 +40,43 @@ class Node {
 }
 
 public class Test1121 {
-    private static String str = "abd##eg##h##c#f##";
+//    private static String str = "abd##eg##h##c#f##";
+    private static String str = "123##4##24##3##";
+
     private static int count = str.length();
 
     public static void main(String[] args) {
         Node node = initTree();
         System.out.print("先序遍历结果:");
-        preOrder(node);
-        System.out.println();
-        System.out.print("中序遍历结果:");
-        inOrder(node);
-        System.out.println();
-        System.out.print("后序遍历结果:");
-        postOrder(node);
-        System.out.println();
-        System.out.print("层次遍历结果:");
-        levelOrder(node);
+//        preOrder(node);
+//        System.out.println();
+//        System.out.print("中序遍历结果:");
+//        inOrder(node);
+//        System.out.println();
+//        System.out.print("后序遍历结果:");
+//        postOrder(node);
+//        System.out.println();
+//        System.out.print("层次遍历结果:");
+//        levelOrder(node);
+//        System.out.println();
+//
+//        System.out.print("二叉树的深度是:");
+//        System.out.println(getDepth(node));
+//        System.out.println(getDepth2(node));
+//
+        List<Character> list1 = new ArrayList();
+        preOrder1(node, list1);
+        for (int i = 0; i < list1.size(); i++) {
+            System.out.print(list1.get(i));
+        }
+
         System.out.println();
 
-        System.out.print("二叉树的深度是:");
-        System.out.println(getDepth(node));
-        System.out.println(getDepth2(node));
+        List<Character> list2 = new ArrayList();
+        preOrder2(node, list2);
+        for (int i = 0; i < list2.size(); i++) {
+            System.out.print(list2.get(i));
+        }
     }
 
     /**
@@ -92,6 +110,34 @@ public class Test1121 {
             stack.push(top.getRight());
             stack.push(top.getLeft());
         }
+    }
+
+    /**
+     * 非递归先序遍历树
+     */
+    private static void preOrder1(Node node, List<Character> numList) {
+        if (node == null) {
+            return;
+        }
+        char curVal = node.getC();
+        numList.add(curVal);
+        preOrder1(node.getLeft(), numList);
+        preOrder1(node.getRight(), numList);
+
+    }
+
+    /**
+     * 非递归先序遍历树
+     */
+    private static void preOrder2(Node node, List<Character> numList) {
+        if (node == null) {
+            return;
+        }
+        char curVal = node.getC();
+        numList.add(curVal);
+        preOrder2(node.getRight(), numList);
+        preOrder2(node.getLeft(), numList);
+
     }
 
     /**

@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HttpDemo {
 
-    private static final String URL = "www.baidu.com";
+    private static final String URL = "http://www.baidu.com";
 
     private static CloseableHttpClient httpClient = HttpClients.createDefault();
 
