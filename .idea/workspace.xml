@@ -6,26 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a918287b-ba6d-4f6b-a1cb-dd1c6f2c9786" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test0120.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/zzAlgorithm/TTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/src/main/webapp/1.jsp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model/model.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/service/service.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/classes/com/balfish/hotel/train/http/HttpDemo.class" afterPath="$PROJECT_DIR$/main/target/classes/com/balfish/hotel/train/http/HttpDemo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/main-1.0.0.war" afterPath="$PROJECT_DIR$/main/target/main-1.0.0.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Main.class" afterPath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Professor.class" afterPath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Professor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Student.class" afterPath="$PROJECT_DIR$/main/target/main-1.0.0/WEB-INF/classes/com/balfish/hotel/train/java/clone/Student.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/target/model-1.0.0.jar" afterPath="$PROJECT_DIR$/model/target/model-1.0.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/target/service-1.0.0.jar" afterPath="$PROJECT_DIR$/service/target/service-1.0.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/http/HttpDemo.java" afterPath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/http/HttpDemo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java" afterPath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/main/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/surefire-reports/TEST-com.balfish.hotel.train.guava.XxxTest.xml" afterPath="$PROJECT_DIR$/main/target/surefire-reports/TEST-com.balfish.hotel.train.guava.XxxTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/target/surefire-reports/com.balfish.hotel.train.guava.XxxTest.txt" afterPath="$PROJECT_DIR$/main/target/surefire-reports/com.balfish.hotel.train.guava.XxxTest.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/model/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/service/target/maven-archiver/pom.properties" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/zzAlgorithm/TTest.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -45,23 +27,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/zzAlgorithm/TTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-960">
-              <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test1205.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Test1205.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="75">
+              <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -129,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Solution1.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Solution1.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Solution1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="213">
+              <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -250,7 +220,6 @@
         <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/proxy/ProxyHandler.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/main/pom.xml" />
-        <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java" />
         <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1215.java" />
         <option value="$PROJECT_DIR$/main/src/main/resources/spring/applicationContext-service.xml" />
         <option value="$PROJECT_DIR$/service/pom.xml" />
@@ -262,6 +231,7 @@
         <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Solution0104.java" />
         <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Solution.java" />
         <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Solution4.java" />
+        <option value="$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java" />
       </list>
     </option>
   </component>
@@ -1566,11 +1536,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="394124000" />
+    <option name="totallyTimeSpent" value="395758000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1436" height="877" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1594,7 +1563,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22802548" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47643313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5592357" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2647059" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2165,24 +2134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/zzAlgorithm/TTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-960">
-          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2291,8 +2242,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Solution1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="213">
+          <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/zzAlgorithm/TTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-454">
+          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/src/main/java/com/balfish/hotel/train/zzlocal/Test1205.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
           <folding />
         </state>
       </provider>
