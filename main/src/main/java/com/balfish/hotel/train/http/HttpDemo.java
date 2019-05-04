@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HttpDemo {
 
-    private static final String URL = "www.baidu.com";
+    private static final String URL = "http://www.qunar.com";
 
     private static CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -48,8 +48,8 @@ public class HttpDemo {
         // 1. 发送HTTP请求
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity entity = response.getEntity();
-        Preconditions.checkArgument(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK,
-                "HTTP返回非200报文, uri:%s, statusCode:%s", URL, Integer.toString(response.getStatusLine().getStatusCode()));
+//        Preconditions.checkArgument(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK,
+//                "HTTP返回非200报文, uri:%s, statusCode:%s", URL, Integer.toString(response.getStatusLine().getStatusCode()));
 
         String jsonResult = EntityUtils.toString(entity, Charsets.UTF_8);
         Preconditions.checkArgument(StringUtils.isNotBlank(jsonResult), "返回数据为空, uri:%s", URL);
