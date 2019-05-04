@@ -1,138 +1,245 @@
 package com.balfish.hotel.zzAlgorithm;
 
-import com.google.common.collect.ImmutableMap;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
-import java.util.regex.Pattern;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 中缀表达式 -> 逆波兰表达式(后缀表达式) -> 计算结果
- * <p>
- * 仅为了说明算法的实现，我们假设操作数均为0-9，符号只有加减乘除和括号
- * <p>
  * Created by yhm on 2017/11/21 AM11:26.
  */
-public class Test1121 {
+class Node {
+    private Node left;
+    private Node right;
+    private char c;
 
-    /**
-     * guava jar
-     * 获得符号对应的优先级，我们假设只有'#', '+', '-', '*', '/', '(', ')'
-     */
-    private static final ImmutableMap<Character, Integer> map = ImmutableMap
-            .<Character, Integer>builder()
-            .put('#', 0) //初始栈
-            .put('(', 1)
-            .put('+', 2)
-            .put('-', 2)
-            .put('*', 3)
-            .put('/', 3)
-            .put(')', 4)
-            .build();
+    public Node getLeft() {
+        return left;
+    }
+
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public Node getRight() {
+        return right;
+    }
+
+    public void setRight(Node right) {
+        this.right = right;
+    }
+
+    public char getC() {
+        return c;
+    }
+
+    public void setC(char c) {
+        this.c = c;
+    }
+}
+
+public class Test1121 {
+//    private static String str = "abd##eg##h##c#f##";
+    private static String str = "123##4##24##3##";
+
+    private static int count = str.length();
 
     public static void main(String[] args) {
-        System.out.println(middleToSuffixExpression("a + b * c + (d * e + f)*g"));
-        System.out.println(middleToSuffixExpression("5 * (3 + 4) - 6 + 8/2"));
-        System.out.println(calSuffixExpression(middleToSuffixExpression("5 * (3 + 4) - 6 + 8/2")));
+        Node node = initTree();
+        System.out.print("先序遍历结果:");
+//        preOrder(node);
+//        System.out.println();
+//        System.out.print("中序遍历结果:");
+//        inOrder(node);
+//        System.out.println();
+//        System.out.print("后序遍历结果:");
+//        postOrder(node);
+//        System.out.println();
+//        System.out.print("层次遍历结果:");
+//        levelOrder(node);
+//        System.out.println();
+//
+//        System.out.print("二叉树的深度是:");
+//        System.out.println(getDepth(node));
+//        System.out.println(getDepth2(node));
+//
+        List<Character> list1 = new ArrayList();
+        preOrder1(node, list1);
+        for (int i = 0; i < list1.size(); i++) {
+            System.out.print(list1.get(i));
+        }
+
+        System.out.println();
+
+        List<Character> list2 = new ArrayList();
+        preOrder2(node, list2);
+        for (int i = 0; i < list2.size(); i++) {
+            System.out.print(list2.get(i));
+        }
     }
 
     /**
-     * 中缀表达式转成后缀表达式
-     * a + b*c + (d * e + f) * g -> abc*+de*f+g*+
-     *
-     * @param middle 中缀表达式
-     * @return 后缀表达式
+     * 递归初始化树
      */
-    private static String middleToSuffixExpression(String middle) {
-        MyStack<Character> charStack = new MyStack<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        charStack.push('#');
-
-        for (char c : middle.toCharArray()) {
-            if (c == ' ') {
-                continue;
-            }
-
-            if (map.get(c) == null) { //不是操作符
-                stringBuilder.append(c);
-                continue;
-            }
-
-            if (c == '(') {
-                charStack.push(c);
-            } else if (c == ')') {
-                while (true) {
-                    Character peek = charStack.peek();
-                    charStack.pop();
-                    if (peek == '(') {
-                        break;
-                    }
-                    stringBuilder.append(peek);
-                }
-            } else {
-                while (true) {
-                    Character peek = charStack.peek();
-                    if (map.get(c) > map.get(peek)) {
-                        charStack.push(c);
-                        break;
-                    }
-                    // 栈顶优先级高,需要弹出
-                    charStack.pop();
-                    stringBuilder.append(peek);
-                }
-            }
+    private static Node initTree() {
+        char c = str.charAt(str.length() - count--);
+        if (c == '#') {
+            return null;
         }
 
-        // 剩余的符号全部弹出
-        while (true) {
-            Character peek = charStack.peek();
-            if (peek == '#') {
-                break;
-            }
-            charStack.pop();
-            stringBuilder.append(peek);
-        }
-        return stringBuilder.toString();
+        Node node = new Node();
+        node.setC(c);
+        node.setLeft(initTree());
+        node.setRight(initTree());
+        return node;
     }
 
     /**
-     * 计算后缀表达式
-     *
-     * @param suffix 后缀表达式
-     * @return 结果，方便起见，我们假设结果为int不暴栈
+     * 非递归先序遍历树
      */
-    private static Integer calSuffixExpression(String suffix) {
-        Stack<Integer> stack = new Stack<>();
-        for (char c : suffix.toCharArray()) {
-            if (Pattern.compile("[0-9]").matcher(String.valueOf(c)).matches()) {
-                stack.push(c - '0');
-            } else {
-                int second = stack.peek();
-                stack.pop();
-                int first = stack.peek();
-                stack.pop();
-                Integer tmp = cal(first, second, c);
-                stack.push(tmp);
+    private static void preOrder(Node node) {
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            Node top = stack.pop();
+            if (top == null) {
+                continue;
             }
+            System.out.print(top.getC());
+            stack.push(top.getRight());
+            stack.push(top.getLeft());
         }
-        return stack.peek();
     }
 
-    private static Integer cal(int first, int second, char c) {
-        Integer ret = null;
-        switch (c) {
-            case '+':
-                ret = first + second;
-                break;
-            case '-':
-                ret = first - second;
-                break;
-            case '*':
-                ret = first * second;
-                break;
-            case '/':
-                ret = first / second;
-                break;
+    /**
+     * 非递归先序遍历树
+     */
+    private static void preOrder1(Node node, List<Character> numList) {
+        if (node == null) {
+            return;
         }
-        return ret;
+        char curVal = node.getC();
+        numList.add(curVal);
+        preOrder1(node.getLeft(), numList);
+        preOrder1(node.getRight(), numList);
+
+    }
+
+    /**
+     * 非递归先序遍历树
+     */
+    private static void preOrder2(Node node, List<Character> numList) {
+        if (node == null) {
+            return;
+        }
+        char curVal = node.getC();
+        numList.add(curVal);
+        preOrder2(node.getRight(), numList);
+        preOrder2(node.getLeft(), numList);
+
+    }
+
+    /**
+     * 非递归中序遍历树
+     */
+    private static void inOrder(Node node) {
+        Stack<Node> stack = new Stack<>();
+        while (node != null || !stack.isEmpty()) {
+            if (node != null) {
+                stack.push(node);
+                node = node.getLeft();
+            } else {
+                node = stack.pop();
+                System.out.print(node.getC());
+                node = node.getRight();
+            }
+        }
+    }
+
+    /**
+     * 非递归后序遍历树
+     */
+    private static void postOrder(Node node) {
+        Stack<Node> stack = new Stack<>();
+        Node flag = new Node();
+        while (node != null || !stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.getLeft();
+            }
+
+            node = stack.peek();
+            if (node.getRight() == null || node.getRight() == flag) {
+                System.out.print(node.getC());
+                flag = node;
+                stack.pop();
+                if (stack.isEmpty()) {
+                    return;
+                }
+                node = null;
+            } else {
+                node = node.getRight();
+            }
+        }
+    }
+
+    /**
+     * 层次遍历遍历树
+     */
+    private static void levelOrder(Node node) {
+        Queue<Node> queue = new LinkedBlockingQueue<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            Node first = queue.remove();
+            System.out.print(first.getC());
+            if (first.getLeft() != null) {
+                queue.add(first.getLeft());
+            }
+            if (first.getLeft() != null) {
+                queue.add(first.getRight());
+            }
+        }
+    }
+
+    /**
+     * 递归求树深度
+     */
+    private static int getDepth(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = getDepth(node.getLeft());
+        int right = getDepth(node.getRight());
+        return left > right ? left + 1 : right + 1;
+    }
+
+    /**
+     * 非递归求树深度
+     */
+    private static int getDepth2(Node node) {
+        Queue<Node> queue = new LinkedBlockingQueue<>();
+        queue.add(node);
+        int cur;
+        int last;
+        int level = 0;
+
+        while (!queue.isEmpty()) {
+            cur = 0;
+            last = queue.size();
+            while (cur < last) {
+                Node first = queue.remove();
+                cur++;
+                if (first.getLeft() != null) {
+                    queue.add(first.getLeft());
+                }
+                if (first.getLeft() != null) {
+                    queue.add(first.getRight());
+                }
+            }
+            level++;
+        }
+        return level;
     }
 }

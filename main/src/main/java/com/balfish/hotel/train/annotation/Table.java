@@ -1,10 +1,6 @@
 package com.balfish.hotel.train.annotation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
@@ -44,7 +40,7 @@ import java.lang.annotation.Target;
 /**
  * 水果颜色注解
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @interface FruitColor {
@@ -69,6 +65,7 @@ import java.lang.annotation.Target;
 }
 
 @TableName("mydesk")
+@FruitColor
 public class Table {
     private String appleName;
 
@@ -95,6 +92,12 @@ public class Table {
     public static void main(String[] args) throws NoSuchFieldException, NoSuchMethodException {
         FruitColor annotation = Table.class.getDeclaredField("appleColor").getAnnotation(FruitColor.class);
         System.out.println(annotation.fruitColor());
+
+//        Table table = new Table();
+//        Class aClass = table.getClass();
+//        aClass = Table.class;
+        FruitColor fruitColor = Table.class.getAnnotation(FruitColor.class);
+        System.out.println(fruitColor.fruitColor() + "~~~~");
 
         FruitName annotation1 = Table.class.getDeclaredMethod("setAppleName", String.class).getAnnotation(FruitName.class);
         System.out.println(annotation1.value());

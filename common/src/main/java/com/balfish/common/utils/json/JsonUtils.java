@@ -9,9 +9,11 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by yhm on 2017/7/12 PM2:17
@@ -86,6 +88,19 @@ public class JsonUtils {
     public static void main(String[] args) {
         String xx = toJson(ApiResult.buildSuccessResult(new User("xx", 12)));
         System.out.println(xx);
+
+
+        HashMap<Long, Integer> map = Maps.newHashMap();
+        map.put(111L, 1);
+        map.put(222L, 2);
+        map.put(333L, 3);
+        String s = JsonUtils.toJson(map);
+        System.out.println(s);
+
+
+        Object o = JsonUtils.toBean(s, HashMap.class, Long.class, Integer.class);
+
+        System.out.println(o);
     }
 }
 
